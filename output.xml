@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<Versions>
+  <nVersionMajor>2</nVersionMajor>
+  <nVersionMinor>0</nVersionMinor>
+</Versions>
+<Citation>
+  <TRCRefID>
+    <yrYrPub>2014</yrYrPub>
+    <sAuthor1>Yad</sAuthor1>
+    <sAuthor2>Pan</sAuthor2>
+    <nAuthorn>0</nAuthorn>
+  </TRCRefID>
+  <eType>journal</eType>
+  <eSourceType>original</eSourceType>
+  <sAuthor>Yadav, A.[Anita]</sAuthor>
+  <sAuthor>Pandey, S.[Siddharth]</sAuthor>
+  <sPubName>J. Chem. Eng. Data</sPubName>
+  <yrPubYr>2014</yrPubYr>
+  <dateCit>29.09.2020</dateCit>
+  <sTitle>Densities and Viscosities of (Choline Chloride + Urea) Deep Eutectic Solvent and Its Aqueous Mixtures in the Temperature Range 293.15 K to 363.15 K</sTitle>
+  <sAbstract>&quot;Deep eutectic solvents (DESs) have been regarded as one of the most promising environmentally benign and cost-effective alternatives to conventional ionic liquids and volatile organic solvents. Aqueous mixtures of DESs have the potential to afford modified properties for specific applications. Densities and dynamic viscosities of a common and popular DES composed of choline chloride and urea in 1:2 molar ratio, named reline, and its aqueous mixtures in the temperature range 293.15 K to 363.15 K are reported. A decrease in density with increasing temperature is found to follow a quadratic expression. Excess molar volumes of the aqueous mixtures of reline are found to be negative at all temperatures and compositions. The absolute excess molar volume is found to decrease, in general, as the temperature is increased from 293.15 K to 323.15 K. For temperatures above 323.15 K, the excess molar volume does not change much with further increase in temperature to 363.15 K. The temperature dependence of dynamic viscosity of aqueous mixtures of reline in the temperature range 293.15 K to 363.15 K at all compositions is found to be better described by a Vogel Fulcher Tamman (VFT) model as opposed to an Arrhenius expression. Excess logarithmic viscosities for aqueous mixtures of reline are found to be negative at most temperatures and compositions</sAbstract>
+  <sDOI>10.1021/je5001796</sDOI>
+  <sIDNum>7</sIDNum>
+  <sVol>59</sVol>
+  <sPage>2221-2229</sPage>
+</Citation>
+<Compound>
+  <RegNum>
+    <nOrgNum>1</nOrgNum>
+  </RegNum>
+  <sStandardInChI>&quot;InChI=1S/C5H14NO.ClH/c1-6(2,3)4-5-7</sStandardInChI>
+  <sStandardInChIKey>SGMZJAMFUVOLNK-UHFFFAOYSA-M</sStandardInChIKey>
+  <sCommonName>cholinium chloride</sCommonName>
+  <sCommonName>2-hydroxy-N,N,N-trimethylethanaminium chloride</sCommonName>
+  <sCommonName>(2-hydroxyethyl)trimethylammonium chloride</sCommonName>
+  <sCommonName>(.beta.-hydroxyethyl)trimethylammonium chloride</sCommonName>
+  <sCommonName>choline chloride</sCommonName>
+  <sCommonName>choline chloride</sCommonName>
+  <sSmiles/>
+  <sFormulaMolec>C5H14ClNO</sFormulaMolec>
+  <ion>
+    <nCharge/>
+  </ion>
+  <Sample>
+    <nSampleNm>1</nSampleNm>
+    <eSource>Commercial source</eSource>
+    <purity>
+      <nStep>1</nStep>
+      <nPurityMass>99</nPurityMass>
+      <nPurityMassDigits>2</nPurityMassDigits>
+      <eAnalMeth>supplier</eAnalMeth>
+    </purity>
+  </Sample>
+</Compound>
+<Compound>
+  <RegNum>
+    <nOrgNum>2</nOrgNum>
+  </RegNum>
+  <sStandardInChI>InChI=1S/CH4N2O/c2-1(3)4/h(H4,2,3,4)</sStandardInChI>
+  <sStandardInChIKey>XSQUKJJJFZCRTK-UHFFFAOYSA-N</sStandardInChIKey>
+  <sCommonName>carbamide</sCommonName>
+  <sCommonName>urea</sCommonName>
+  <sCommonName>urea</sCommonName>
+  <sSmiles/>
+  <sFormulaMolec>CH4N2O</sFormulaMolec>
+  <ion>
+    <nCharge/>
+  </ion>
+  <Sample>
+    <nSampleNm>1</nSampleNm>
+    <eSource>Commercial source</eSource>
+    <purity>
+      <nStep>1</nStep>
+      <nPurityMass>99</nPurityMass>
+      <nPurityMassDigits>2</nPurityMassDigits>
+      <eAnalMeth>supplier</eAnalMeth>
+    </purity>
+  </Sample>
+</Compound>
+<Compound>
+  <RegNum>
+    <nOrgNum>3</nOrgNum>
+  </RegNum>
+  <sStandardInChI>InChI=1S/H2O/h1H2</sStandardInChI>
+  <sStandardInChIKey>XLYOFNOQVPJJNP-UHFFFAOYSA-N</sStandardInChIKey>
+  <sCommonName>water</sCommonName>
+  <sCommonName>water</sCommonName>
+  <sSmiles/>
+  <sFormulaMolec>H2O</sFormulaMolec>
+  <ion>
+    <nCharge/>
+  </ion>
+  <Sample>
+    <nSampleNm>1</nSampleNm>
+    <eSource>Commercial source</eSource>
+    <purity>
+      <nStep>1</nStep>
+      <nPurityMass>99,9</nPurityMass>
+      <nPurityMassDigits>3</nPurityMassDigits>
+      <eAnalMeth>Estimated by compiler</eAnalMeth>
+    </purity>
+  </Sample>
+</Compound>
