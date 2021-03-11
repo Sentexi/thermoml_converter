@@ -3,6 +3,7 @@ from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.etree import ElementTree
 from xml.dom import minidom
 import os
+import re
 
 def create_xml_subelement_with_list(parent,name,list):
     child = SubElement(parent, name)
@@ -98,16 +99,17 @@ def preproc_compound(compound_csv):
     print("Preprocessing compound")
     
     #we need to extract the common names
-    #-2 because the first is the documentation and the second is the first common name
-    ncommon_names = len(compound_csv[3])-2
+    #-1 because the first is the documentation
+    ncommon_names = len(compound_csv[3])-1
     common_names = compound_csv[3]
     
     #same for number of samples
     #TODO: Find a description for samples AND purification steps
     nsamples = 1
 
-    for i in range(ncommon_names):
-        compound_csv.insert(3,["common_name_entry",common_names[i+2]])
+    #since the first tag is always given we need n-1 insertions
+    for i in range(ncommon_names-1):
+        compound_csv.insert(3,["common_name_entry",common_names[i+1]])
     
     return compound_csv , ncommon_names, nsamples
         
@@ -138,7 +140,7 @@ def create_compound(compound_csv):
         Sample = create_xml_subelement_with_list(Compound,"Sample",empty)
         nSampleNm = create_xml_subelement_with_list(Sample,"nSampleNm",Elements)
         eSource = create_xml_subelement_with_list(Sample,"eSource",Elements)
-        purity = create_xml_subelement_with_list(Sample,"purity",Elements)
+        purity = create_xml_subelement_with_list(Sample,"purity",empty)
         
         nStep = create_xml_subelement_with_list(purity,"nStep",Elements)
         nPurityMass = create_xml_subelement_with_list(purity,"nPurityMass",Elements)
@@ -150,6 +152,8 @@ def create_compound(compound_csv):
         create_sample()    
         
     for i in range(len(compound_csv)):
+        print(Elements[i])
+        print(compound_csv[i][1])
         Elements[i].text = compound_csv[i][1]
         
     final = prettify(Compound)
@@ -164,9 +168,25 @@ if __name__ == "__main__":
     version_info = create_version_info()
     citation_data = csv_reader(os.path.join('CSV','Citation_template.csv'))
     citation = create_citation(citation_data)
+    
+    
+    
+    
     #TODO: Cycle through Compounds
-    compound_data = csv_reader(os.path.join('CSV','Compound_template.csv'))
-    compound = create_compound(compound_data)    
-    writefile(version_info + citation + compound)
+    dir = os.listdir('CSV')
+    r = re.compile("[c,C]ompound.*\d")
+    compound_list = list(filter(r.match, dir)) # Read Note
+    print(compound_list)
+    
+    all_compounds = ''
+    
+    for compound_dir in compound_list:
+        compound_data = csv_reader(os.path.join('CSV',compound_dir))
+        compound = create_compound(compound_data)
+        
+        all_compounds += compound
+
+    
+    writefile(version_info + citation + all_compounds)
     
     
