@@ -161,22 +161,35 @@ def create_compound(compound_csv):
 
     return final[23:]
 
+def create_data_entry(data_csv):
+    
+    print("Creating Data entry")
+    
+    Elements = []
+    empty = [] #used for elements which shall not be filled out
+    PureOrMixtureData = Element('PureOrMixtureData')
+    nPureOrMixtureDataNumber = create_xml_subelement_with_list(PureOrMixtureData,"nPureOrMixtureDataNumber",Elements)
+    Component = create_xml_subelement_with_list(PureOrMixtureData,"Component",empty)
+    RegNum = create_xml_subelement_with_list(Component,"RegNum",empty)
+    nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements)
+    nSampleNm = create_xml_subelement_with_list(Component,"nSampleNm",Elements)
 
     
 
 if __name__ == "__main__":
+    #Creates ThermoML Version
     version_info = create_version_info()
+    
+    #Reads Citation info
     citation_data = csv_reader(os.path.join('CSV','Citation_template.csv'))
     citation = create_citation(citation_data)
     
     
-    
-    
-    #TODO: Cycle through Compounds
+    #Cycle through all compound templates
     dir = os.listdir('CSV')
     r = re.compile("[c,C]ompound.*\d")
     compound_list = list(filter(r.match, dir)) # Read Note
-    print(compound_list)
+    #print(compound_list)
     
     all_compounds = ''
     
