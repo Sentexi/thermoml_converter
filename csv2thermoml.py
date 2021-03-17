@@ -168,11 +168,107 @@ def create_data_entry(data_csv):
     Elements = []
     empty = [] #used for elements which shall not be filled out
     PureOrMixtureData = Element('PureOrMixtureData')
+    
+    #Info about the Dataframe
     nPureOrMixtureDataNumber = create_xml_subelement_with_list(PureOrMixtureData,"nPureOrMixtureDataNumber",Elements)
     Component = create_xml_subelement_with_list(PureOrMixtureData,"Component",empty)
     RegNum = create_xml_subelement_with_list(Component,"RegNum",empty)
     nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements)
     nSampleNm = create_xml_subelement_with_list(Component,"nSampleNm",Elements)
+    eExpPurpose = create_xml_subelement_with_list(PureOrMixtureData,"eExpPurpose",Elements)
+    sCompiler = create_xml_subelement_with_list(PureOrMixtureData,"sCompiler",Elements)
+    sContributor = create_xml_subelement_with_list(PureOrMixtureData,"sContributor",Elements)
+    dateDateAdded = create_xml_subelement_with_list(PureOrMixtureData,"dateDateAdded",Elements)
+    
+    #Info about the measured property
+    Property =  create_xml_subelement_with_list(PureOrMixtureData,"dateDateAdded",empty)
+    nPropNumber =  create_xml_subelement_with_list(Property,"nPropNumber",Elements)
+    Property-MethodID =  create_xml_subelement_with_list(Property,"Property-MethodID",empty)
+    PropertyGroup =  create_xml_subelement_with_list(Property-MethodID,"PropertyGroup",empty) 
+    VolumetricProp  =  create_xml_subelement_with_list(PropertyGroup,"VolumetricProp",empty) 
+    ePropName  =  create_xml_subelement_with_list(VolumetricProp,"ePropName",Elements) 
+    eMethodName  =  create_xml_subelement_with_list(VolumetricProp,"eMethodName",Elements) 
+    PropPhaseID =  create_xml_subelement_with_list(Property,"PropPhaseID",empty)
+    ePropPhase = create_xml_subelement_with_list(PropPhaseID,"ePropPhase",Elements)
+    ePresentation = create_xml_subelement_with_list(Property,"ePresentation",Elements)
+    
+    #Uncertainty of the property
+    CombinedUncertainty = create_xml_subelement_with_list(Property,"CombinedUncertainty",empty)
+    nCombUncertAssessNum = create_xml_subelement_with_list(CombinedUncertainty,"nCombUncertAssessNum",Elements)
+    sCombUncertEvaluator = create_xml_subelement_with_list(CombinedUncertainty,"sCombUncertEvaluator",Elements)
+    eCombUncertEvalMethod = create_xml_subelement_with_list(CombinedUncertainty,"eCombUncertEvalMethod",Elements)
+    nCombUncertLevOfConfid = create_xml_subelement_with_list(CombinedUncertainty,"nCombUncertLevOfConfid",Elements)
+    
+    #Phase info
+    PhaseID = create_xml_subelement_with_list(PureOrMixtureData,"PhaseID",empty)
+    ePhase = create_xml_subelement_with_list(PhaseID,"ePhase",Elements)
+    
+    #Constraints
+    Constraint = create_xml_subelement_with_list(PureOrMixtureData,"Constraint",empty) 
+    nConstraintNumber = create_xml_subelement_with_list(Constraint,"nConstraintNumber",Elements) 
+    ConstraintID = create_xml_subelement_with_list(nConstraintNumber,"ConstraintID",empty) 
+    ConstraintType = create_xml_subelement_with_list(ConstraintID,"ConstraintType",empty) 
+    #TODO: Collect all possible constraints, make them applicable if necessary
+    ePressure = create_xml_subelement_with_list(ConstraintType,"ePressure",Elements) 
+    ConstraintPhaseID = create_xml_subelement_with_list(Constraint,"ConstraintPhaseID",empty)  
+    eConstraintPhase = create_xml_subelement_with_list(ConstraintPhaseID,"eConstraintPhase",Elements)  
+    nConstraintValue = create_xml_subelement_with_list(Constraint,"nConstraintValue",Elements)
+    nConstrDigits = create_xml_subelement_with_list(Constraint,"nConstrDigits",Elements)
+    
+    #Variable declaration
+    Variable = create_xml_subelement_with_list(PureOrMixtureData,"Variable",empty)
+    nVarNumber = create_xml_subelement_with_list(Variable,"nVarNumber",Elements)
+    VariableID = create_xml_subelement_with_list(Variable,"VariableID",empty)
+    VariableType = create_xml_subelement_with_list(VariableID,"VariableType",empty)
+    #TODO: Choose between temperature, composition, or any other ThermoML tags
+    eTemperature = create_xml_subelement_with_list(VariableType,"eTemperature",Elements)
+    #eComponentComposition = create_xml_subelement_with_list(VariableType,"eComponentComposition",Elements)
+    #For component composition only: RegNum of compound as reference
+    RegNum = create_xml_subelement_with_list(VariableID,"RegNum",empty) 
+    nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements) 
+    
+    #Phase info again
+    VarPhaseID = create_xml_subelement_with_list(Variable,"VarPhaseID",empty)
+    eVarPhase = create_xml_subelement_with_list(VarPhaseID,"eVarPhase",Elements)
+    
+    def add_datapoint(values,digits):
+        NumValues = create_xml_subelement_with_list(PureOrMixtureData,"NumValues",empty)
+
+        #loops for each variable
+        VariableValue = create_xml_subelement_with_list(NumValues,"VariableValue",empty)
+        nVarNumber = create_xml_subelement_with_list(VariableValue,"nVarNumber",Elements)
+        nVarValue = create_xml_subelement_with_list(VariableValue,"nVarValue",Elements)
+        nVarDigits = create_xml_subelement_with_list(VariableValue,"nVarDigits",Elements)
+        
+        #once per datapoint add property value
+        PropertyValue = create_xml_subelement_with_list(NumValues,"PropertyValue",empty)
+        nPropNumber = create_xml_subelement_with_list(PropertyValue,"nPropNumber",Elements)
+        nPropValue = create_xml_subelement_with_list(PropertyValue,"nPropValue",Elements)
+        nPropDigits = create_xml_subelement_with_list(PropertyValue,"nPropDigits",Elements)
+        CombinedUncertainty = create_xml_subelement_with_list(PropertyValue,"CombinedUncertainty",empty)
+        nCombUncertAssessNum = create_xml_subelement_with_list(CombinedUncertainty,"nCombUncertAssessNum",Elements)
+        nCombExpandUncertValue = create_xml_subelement_with_list(CombinedUncertainty,"nCombExpandUncertValue",Elements)
+        
+        pass
+
+
+        
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
 
     
 
