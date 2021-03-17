@@ -249,7 +249,7 @@ def create_data_entry(data_csv):
         nCombUncertAssessNum = create_xml_subelement_with_list(CombinedUncertainty,"nCombUncertAssessNum",Elements)
         nCombExpandUncertValue = create_xml_subelement_with_list(CombinedUncertainty,"nCombExpandUncertValue",Elements)
         
-        pass
+        return 0
 
 
         
