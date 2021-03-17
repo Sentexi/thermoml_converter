@@ -101,3 +101,69 @@
     </purity>
   </Sample>
 </Compound>
+<PureOrMixtureData>
+  <nPureOrMixtureDataNumber>1</nPureOrMixtureDataNumber>
+  <Component>
+    <RegNum>
+      <nOrgNum>2</nOrgNum>
+    </RegNum>
+    <nSampleNm>1</nSampleNm>
+  </Component>
+  <eExpPurpose>Principal objective of the work</eExpPurpose>
+  <sCompiler>RDC</sCompiler>
+  <sContributor>XXX</sContributor>
+  <dateDateAdded>5/30/2014</dateDateAdded>
+  <dateDateAdded>
+    <nPropNumber>1</nPropNumber>
+    <Property-MethodID>
+      <PropertyGroup>
+        <VolumetricProp>
+          <ePropName> value / unit&quot;</ePropName>
+          <eMethodName>Vibrating tube method</eMethodName>
+        </VolumetricProp>
+      </PropertyGroup>
+    </Property-MethodID>
+    <PropPhaseID>
+      <ePropPhase>Liquid</ePropPhase>
+    </PropPhaseID>
+    <ePresentation>Direct value, X</ePresentation>
+    <CombinedUncertainty>
+      <nCombUncertAssessNum>1</nCombUncertAssessNum>
+      <sCombUncertEvaluator>Data file compiler</sCombUncertEvaluator>
+      <eCombUncertEvalMethod>Propagation of evaluated standard uncertainties</eCombUncertEvalMethod>
+      <nCombUncertLevOfConfid>95</nCombUncertLevOfConfid>
+    </CombinedUncertainty>
+  </dateDateAdded>
+  <PhaseID>
+    <ePhase>Liquid</ePhase>
+  </PhaseID>
+  <Constraint>
+    <nConstraintNumber>
+      1
+      <ConstraintID>
+        <ConstraintType>
+          <ePressure>Pressure, kPa</ePressure>
+        </ConstraintType>
+      </ConstraintID>
+    </nConstraintNumber>
+    <ConstraintPhaseID>
+      <eConstraintPhase/>
+    </ConstraintPhaseID>
+    <nConstraintValue/>
+    <nConstrDigits/>
+  </Constraint>
+  <Variable>
+    <nVarNumber/>
+    <VariableID>
+      <VariableType>
+        <eTemperature/>
+      </VariableType>
+      <RegNum>
+        <nOrgNum/>
+      </RegNum>
+    </VariableID>
+    <VarPhaseID>
+      <eVarPhase/>
+    </VarPhaseID>
+  </Variable>
+</PureOrMixtureData>

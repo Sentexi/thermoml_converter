@@ -142,6 +142,7 @@ def create_compound(compound_csv):
         eSource = create_xml_subelement_with_list(Sample,"eSource",Elements)
         purity = create_xml_subelement_with_list(Sample,"purity",empty)
         
+        #TODO loop for each purification step
         nStep = create_xml_subelement_with_list(purity,"nStep",Elements)
         nPurityMass = create_xml_subelement_with_list(purity,"nPurityMass",Elements)
         nPurityMassDigits = create_xml_subelement_with_list(purity,"nPurityMassDigits",Elements)
@@ -183,8 +184,8 @@ def create_data_entry(data_csv):
     #Info about the measured property
     Property =  create_xml_subelement_with_list(PureOrMixtureData,"dateDateAdded",empty)
     nPropNumber =  create_xml_subelement_with_list(Property,"nPropNumber",Elements)
-    Property-MethodID =  create_xml_subelement_with_list(Property,"Property-MethodID",empty)
-    PropertyGroup =  create_xml_subelement_with_list(Property-MethodID,"PropertyGroup",empty) 
+    PropertyMethodID =  create_xml_subelement_with_list(Property,"Property-MethodID",empty)
+    PropertyGroup =  create_xml_subelement_with_list(PropertyMethodID,"PropertyGroup",empty) 
     VolumetricProp  =  create_xml_subelement_with_list(PropertyGroup,"VolumetricProp",empty) 
     ePropName  =  create_xml_subelement_with_list(VolumetricProp,"ePropName",Elements) 
     eMethodName  =  create_xml_subelement_with_list(VolumetricProp,"eMethodName",Elements) 
@@ -249,28 +250,20 @@ def create_data_entry(data_csv):
         nCombUncertAssessNum = create_xml_subelement_with_list(CombinedUncertainty,"nCombUncertAssessNum",Elements)
         nCombExpandUncertValue = create_xml_subelement_with_list(CombinedUncertainty,"nCombExpandUncertValue",Elements)
         
-        return 0
-
-
+        pass
+    
+    for i in range(len(data_csv)):
+        print(Elements[i])
+        print(data_csv[i][1])
+        Elements[i].text = data_csv[i][1]
         
+    final = prettify(PureOrMixtureData)
+    print(final)
+
+    return final[23:]
 
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    
+   
 
 if __name__ == "__main__":
     #Creates ThermoML Version
@@ -284,7 +277,7 @@ if __name__ == "__main__":
     #Cycle through all compound templates
     dir = os.listdir('CSV')
     r = re.compile("[c,C]ompound.*\d")
-    compound_list = list(filter(r.match, dir)) # Read Note
+    compound_list = list(filter(r.match, dir))
     #print(compound_list)
     
     all_compounds = ''
@@ -295,7 +288,20 @@ if __name__ == "__main__":
         
         all_compounds += compound
 
+    all_datapoints = ''
     
-    writefile(version_info + citation + all_compounds)
+    dir = os.listdir('CSV')
+    r = re.compile("[d,D]ata.*\d")
+    data_list = list(filter(r.match, dir))
+    #print(compound_list)
+    
+    
+    for data_dir in data_list:
+        datapoint_data = csv_reader(os.path.join('CSV',data_dir))
+        datapoint = create_data_entry(datapoint_data)
+        
+        all_datapoints += datapoint
+    
+    writefile(version_info + citation + all_compounds + all_datapoints)
     
     

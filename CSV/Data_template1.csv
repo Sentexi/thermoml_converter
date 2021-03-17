@@ -1,0 +1,19 @@
+number of entry;1;;
+Compound number as stated in templates;2;1;3
+"Sample number as declared in ""Sample""";1;1;1
+Experimental purpose;Principal objective of the work;;
+compiler(?);RDC;;
+contributor;XXX;;
+date Data was added;5/30/2014;;
+Property number;1;;
+"Property name; value / unit";Mass density, kg/m3;;
+method of measurement;Vibrating tube method;;
+Phase of measurement;Liquid;;
+value presentation, default: Direct value, X;Direct value, X;;
+number of uncertainty;1;;
+evaluatior;Data file compiler;;
+evaluation method;Propagation of evaluated standard uncertainties;;
+confidence level;95;;
+Phase of measurement again;Liquid;;
+number of contraint;1;;
+type of constraint, e.g. Pressure;Pressure, kPa;;
