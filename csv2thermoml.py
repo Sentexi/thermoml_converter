@@ -169,17 +169,44 @@ def preproc_data_entry(data_csv):
     for k in range(len(data_csv[1])-2):
         data_csv.insert(3+(k*2), ["entry",data_csv_src[1][k+2]])
         data_csv.insert(3+(k*2)+1, ["entry",data_csv_src[2][k+2]])
-                
-        
+                    
     nCompounds = len(data_csv[1])-1
+    
+    
+    #Number of variables from csv template
+    nVariables = len(data_csv_src[22])-1
+
+    #Tracking variable types since different types need different handling
+    varTypes = []
+    
+    #Special insertions for mole fractions are needed, adding a tracker here
+    isFraction = 0
+
+    for l in range(len(data_csv_src[22])-1):
+        #Also adding nCompounds to account for the number of insertions done above
+        data_csv.insert(25+(l*3)+(nCompounds-1)*2+isFraction, ["entry",data_csv_src[22][l+1]])
+        data_csv.insert(25+(l*3)+(nCompounds-1)*2+1+isFraction, ["entry",data_csv_src[23][l+1]])
+        data_csv.insert(25+(l*3)+(nCompounds-1)*2+2+isFraction, ["entry",data_csv_src[24][l+1]])
+        if data_csv_src[25][l+1] != "":
+            print("Fraction!")
+            data_csv.insert(25+(l*3)+(nCompounds-1)*2+3+isFraction, ["entry",data_csv_src[25][l+1]])
+            isFraction = 1
+        else:
+            isFraction = 0
+        varTypes.append(data_csv_src[23][l+1])
+        
+        
+            
+    data_csv = data_csv[:22+(nCompounds-1)*2]+data_csv[25+(nCompounds-1)*2:]
+    data_csv = data_csv[:-1]
     
     print(data_csv)
 
-    return data_csv, nCompounds
+    return data_csv, nCompounds, nVariables, varTypes
 
 def create_data_entry(data_csv):
 
-    data_csv, nCompounds = preproc_data_entry(data_csv)
+    data_csv, nCompounds, nVariables, varTypes = preproc_data_entry(data_csv)
     
     print("Creating Data entry")
     
@@ -241,20 +268,23 @@ def create_data_entry(data_csv):
     nConstrDigits = create_xml_subelement_with_list(Constraint,"nConstrDigits",Elements)
     
     #Variable declaration
-    Variable = create_xml_subelement_with_list(PureOrMixtureData,"Variable",empty)
-    nVarNumber = create_xml_subelement_with_list(Variable,"nVarNumber",Elements)
-    VariableID = create_xml_subelement_with_list(Variable,"VariableID",empty)
-    VariableType = create_xml_subelement_with_list(VariableID,"VariableType",empty)
-    #TODO: Choose between temperature, composition, or any other ThermoML tags
-    eTemperature = create_xml_subelement_with_list(VariableType,"eTemperature",Elements)
-    #eComponentComposition = create_xml_subelement_with_list(VariableType,"eComponentComposition",Elements)
-    #For component composition only: RegNum of compound as reference
-    RegNum = create_xml_subelement_with_list(VariableID,"RegNum",empty) 
-    nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements) 
-    
-    #Phase info again
-    VarPhaseID = create_xml_subelement_with_list(Variable,"VarPhaseID",empty)
-    eVarPhase = create_xml_subelement_with_list(VarPhaseID,"eVarPhase",Elements)
+    for i in range(nVariables):
+        Variable = create_xml_subelement_with_list(PureOrMixtureData,"Variable",empty)
+        nVarNumber = create_xml_subelement_with_list(Variable,"nVarNumber",Elements)
+        VariableID = create_xml_subelement_with_list(Variable,"VariableID",empty)
+        VariableType = create_xml_subelement_with_list(VariableID,"VariableType",empty)
+        #TODO: Choose between temperature, composition, or any other ThermoML tags
+        if varTypes[i] == "Temperature, K":
+            eTemperature = create_xml_subelement_with_list(VariableType,"eTemperature",Elements)
+        else:
+            eComponentComposition = create_xml_subelement_with_list(VariableType,"eComponentComposition",Elements)
+            #For component composition only: RegNum of compound as reference
+            RegNum = create_xml_subelement_with_list(VariableID,"RegNum",empty) 
+            nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements) 
+        #Phase info again
+        VarPhaseID = create_xml_subelement_with_list(Variable,"VarPhaseID",empty)
+        eVarPhase = create_xml_subelement_with_list(VarPhaseID,"eVarPhase",Elements)    
+
     
     def add_datapoint(values,digits):
         NumValues = create_xml_subelement_with_list(PureOrMixtureData,"NumValues",empty)
@@ -277,6 +307,8 @@ def create_data_entry(data_csv):
         pass
     
     for i in range(len(data_csv)):
+        print(len(Elements))
+        print(len(data_csv))
         print(Elements[i])
         print(data_csv[i][1])
         Elements[i].text = data_csv[i][1]

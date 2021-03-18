@@ -20,3 +20,7 @@ type of constraint, e.g. Pressure;Pressure, kPa;;
 contstraint phase;liquid;;
 Constraint value;101;;
 Constraint digits;3;;
+enumerate variables;1;2;3
+"Variable type e.g. ""Temperature / K"" or ""Mole fraction""";Temperature, K;Mole fraction;Mole fraction
+Variable Phase;Liquid;liquid;liquid
+If the Variable type is a mole fraction, specify the compound id you are referring;;1;2

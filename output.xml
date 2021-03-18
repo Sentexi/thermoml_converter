@@ -163,17 +163,42 @@
     <nConstrDigits>3</nConstrDigits>
   </Constraint>
   <Variable>
-    <nVarNumber/>
+    <nVarNumber>1</nVarNumber>
     <VariableID>
       <VariableType>
-        <eTemperature/>
+        <eTemperature>Temperature, K</eTemperature>
+      </VariableType>
+    </VariableID>
+    <VarPhaseID>
+      <eVarPhase>Liquid</eVarPhase>
+    </VarPhaseID>
+  </Variable>
+  <Variable>
+    <nVarNumber>2</nVarNumber>
+    <VariableID>
+      <VariableType>
+        <eComponentComposition>Mole fraction</eComponentComposition>
       </VariableType>
       <RegNum>
-        <nOrgNum/>
+        <nOrgNum>liquid</nOrgNum>
       </RegNum>
     </VariableID>
     <VarPhaseID>
-      <eVarPhase/>
+      <eVarPhase>1</eVarPhase>
+    </VarPhaseID>
+  </Variable>
+  <Variable>
+    <nVarNumber>3</nVarNumber>
+    <VariableID>
+      <VariableType>
+        <eComponentComposition>Mole fraction</eComponentComposition>
+      </VariableType>
+      <RegNum>
+        <nOrgNum>liquid</nOrgNum>
+      </RegNum>
+    </VariableID>
+    <VarPhaseID>
+      <eVarPhase>2</eVarPhase>
     </VarPhaseID>
   </Variable>
 </PureOrMixtureData>
