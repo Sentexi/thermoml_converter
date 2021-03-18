@@ -109,6 +109,18 @@
     </RegNum>
     <nSampleNm>1</nSampleNm>
   </Component>
+  <Component>
+    <RegNum>
+      <nOrgNum>1</nOrgNum>
+    </RegNum>
+    <nSampleNm>1</nSampleNm>
+  </Component>
+  <Component>
+    <RegNum>
+      <nOrgNum>3</nOrgNum>
+    </RegNum>
+    <nSampleNm>1</nSampleNm>
+  </Component>
   <eExpPurpose>Principal objective of the work</eExpPurpose>
   <sCompiler>RDC</sCompiler>
   <sContributor>XXX</sContributor>
@@ -118,7 +130,7 @@
     <Property-MethodID>
       <PropertyGroup>
         <VolumetricProp>
-          <ePropName> value / unit&quot;</ePropName>
+          <ePropName>Mass density, kg/m3</ePropName>
           <eMethodName>Vibrating tube method</eMethodName>
         </VolumetricProp>
       </PropertyGroup>
@@ -138,16 +150,14 @@
     <ePhase>Liquid</ePhase>
   </PhaseID>
   <Constraint>
-    <nConstraintNumber>
-      1
-      <ConstraintID>
-        <ConstraintType>
-          <ePressure>Pressure, kPa</ePressure>
-        </ConstraintType>
-      </ConstraintID>
-    </nConstraintNumber>
+    <nConstraintNumber>1</nConstraintNumber>
+    <ConstraintID>
+      <ConstraintType>
+        <ePressure>Pressure, kPa</ePressure>
+      </ConstraintType>
+    </ConstraintID>
     <ConstraintPhaseID>
-      <eConstraintPhase/>
+      <eConstraintPhase>liquid</eConstraintPhase>
     </ConstraintPhaseID>
     <nConstraintValue/>
     <nConstrDigits/>

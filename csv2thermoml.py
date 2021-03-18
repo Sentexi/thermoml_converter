@@ -161,8 +161,25 @@ def create_compound(compound_csv):
     print(final)
 
     return final[23:]
+    
+def preproc_data_entry(data_csv):
+
+    data_csv_src = data_csv.copy()
+
+    for k in range(len(data_csv[1])-2):
+        data_csv.insert(3+(k*2), ["entry",data_csv_src[1][k+2]])
+        data_csv.insert(3+(k*2)+1, ["entry",data_csv_src[2][k+2]])
+                
+        
+    nCompounds = len(data_csv[1])-1
+    
+    print(data_csv)
+
+    return data_csv, nCompounds
 
 def create_data_entry(data_csv):
+
+    data_csv, nCompounds = preproc_data_entry(data_csv)
     
     print("Creating Data entry")
     
@@ -172,10 +189,17 @@ def create_data_entry(data_csv):
     
     #Info about the Dataframe
     nPureOrMixtureDataNumber = create_xml_subelement_with_list(PureOrMixtureData,"nPureOrMixtureDataNumber",Elements)
-    Component = create_xml_subelement_with_list(PureOrMixtureData,"Component",empty)
-    RegNum = create_xml_subelement_with_list(Component,"RegNum",empty)
-    nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements)
-    nSampleNm = create_xml_subelement_with_list(Component,"nSampleNm",Elements)
+    
+    for n in range(nCompounds):
+     
+        Component = create_xml_subelement_with_list(PureOrMixtureData,"Component",empty)
+        RegNum = create_xml_subelement_with_list(Component,"RegNum",empty)
+        nOrgNum = create_xml_subelement_with_list(RegNum,"nOrgNum",Elements)
+        nSampleNm = create_xml_subelement_with_list(Component,"nSampleNm",Elements)
+    
+    
+    
+    
     eExpPurpose = create_xml_subelement_with_list(PureOrMixtureData,"eExpPurpose",Elements)
     sCompiler = create_xml_subelement_with_list(PureOrMixtureData,"sCompiler",Elements)
     sContributor = create_xml_subelement_with_list(PureOrMixtureData,"sContributor",Elements)
@@ -207,7 +231,7 @@ def create_data_entry(data_csv):
     #Constraints
     Constraint = create_xml_subelement_with_list(PureOrMixtureData,"Constraint",empty) 
     nConstraintNumber = create_xml_subelement_with_list(Constraint,"nConstraintNumber",Elements) 
-    ConstraintID = create_xml_subelement_with_list(nConstraintNumber,"ConstraintID",empty) 
+    ConstraintID = create_xml_subelement_with_list(Constraint,"ConstraintID",empty) 
     ConstraintType = create_xml_subelement_with_list(ConstraintID,"ConstraintType",empty) 
     #TODO: Collect all possible constraints, make them applicable if necessary
     ePressure = create_xml_subelement_with_list(ConstraintType,"ePressure",Elements) 
