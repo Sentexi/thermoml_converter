@@ -159,8 +159,8 @@
     <ConstraintPhaseID>
       <eConstraintPhase>liquid</eConstraintPhase>
     </ConstraintPhaseID>
-    <nConstraintValue/>
-    <nConstrDigits/>
+    <nConstraintValue>101</nConstraintValue>
+    <nConstrDigits>3</nConstrDigits>
   </Constraint>
   <Variable>
     <nVarNumber/>

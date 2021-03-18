@@ -18,3 +18,5 @@ Phase of measurement again;Liquid;;
 number of contraint;1;;
 type of constraint, e.g. Pressure;Pressure, kPa;;
 contstraint phase;liquid;;
+Constraint value;101;;
+Constraint digits;3;;
