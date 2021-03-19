@@ -166,6 +166,7 @@ def preproc_data_entry(data_csv):
 
     data_csv_src = data_csv.copy()
 
+    #Insertions to serialize 2D Component and Sample info
     for k in range(len(data_csv[1])-2):
         data_csv.insert(3+(k*2), ["entry",data_csv_src[1][k+2]])
         data_csv.insert(3+(k*2)+1, ["entry",data_csv_src[2][k+2]])
@@ -181,24 +182,57 @@ def preproc_data_entry(data_csv):
     
     #Special insertions for mole fractions are needed, adding a tracker here
     isFraction = 0
+    
+    #Specify number of insertions already taken
+    nIns = (nCompounds-1)*2
 
+
+    varIns = 0
+    #Insertions to serialize 2D Variable info
     for l in range(len(data_csv_src[22])-1):
         #Also adding nCompounds to account for the number of insertions done above
-        data_csv.insert(25+(l*3)+(nCompounds-1)*2+isFraction, ["entry",data_csv_src[22][l+1]])
-        data_csv.insert(25+(l*3)+(nCompounds-1)*2+1+isFraction, ["entry",data_csv_src[23][l+1]])
-        data_csv.insert(25+(l*3)+(nCompounds-1)*2+2+isFraction, ["entry",data_csv_src[24][l+1]])
+        data_csv.insert(25+(l*3)+nIns+isFraction, ["entry",data_csv_src[22][l+1]])
+        data_csv.insert(25+(l*3)+nIns+1+isFraction, ["entry",data_csv_src[23][l+1]])
+        data_csv.insert(25+(l*3)+nIns+2+isFraction, ["entry",data_csv_src[24][l+1]])
         if data_csv_src[25][l+1] != "":
             print("Fraction!")
-            data_csv.insert(25+(l*3)+(nCompounds-1)*2+3+isFraction, ["entry",data_csv_src[25][l+1]])
+            data_csv.insert(25+(l*3)+nIns+3+isFraction, ["entry",data_csv_src[25][l+1]])
             isFraction = 1
+            varIns += 4
         else:
             isFraction = 0
+            varIns += 3
         varTypes.append(data_csv_src[23][l+1])
         
         
             
     data_csv = data_csv[:22+(nCompounds-1)*2]+data_csv[25+(nCompounds-1)*2:]
-    data_csv = data_csv[:-1]
+    
+    #Update number of insertions already taken
+    nIns += varIns
+    
+    #Insertions to serialize 2D Datapoints
+    
+    #Take variable numbers
+    var_number = data_csv_src[22][1:]
+    #extract significant digits
+    sig_digits = data_csv_src[26][1:]
+    datapoints = data_csv_src[27:]
+        
+        
+    #TODO: Slice datapoints list accordingly and serialize through the loop!    
+    for m in range(len(datapoints)):
+        for i in range(len(datapoints[m])):
+            entry = datapoints[m]
+            entry = entry[1:]
+        
+            print(len(entry))            
+            data_csv.insert(25+nIns,["data_entry", var_number[i]])
+            data_csv.insert(25+nIns+1,["data_entry", entry[i]])
+            data_csv.insert(25+nIns+2,["data_entry", sig_digits[i]])
+            
+            nIns += 3
+    
     
     print(data_csv)
 
