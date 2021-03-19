@@ -121,6 +121,12 @@
     </RegNum>
     <nSampleNm>1</nSampleNm>
   </Component>
+  <Component>
+    <RegNum>
+      <nOrgNum/>
+    </RegNum>
+    <nSampleNm/>
+  </Component>
   <eExpPurpose>Principal objective of the work</eExpPurpose>
   <sCompiler>RDC</sCompiler>
   <sContributor>XXX</sContributor>
@@ -198,7 +204,73 @@
       </RegNum>
     </VariableID>
     <VarPhaseID>
-      <eVarPhase>2</eVarPhase>
+      <eVarPhase/>
     </VarPhaseID>
   </Variable>
+  <Variable>
+    <nVarNumber/>
+    <VariableID>
+      <VariableType>
+        <eComponentComposition/>
+      </VariableType>
+      <RegNum>
+        <nOrgNum>2</nOrgNum>
+      </RegNum>
+    </VariableID>
+    <VarPhaseID>
+      <eVarPhase>1</eVarPhase>
+    </VarPhaseID>
+  </Variable>
+  <NumValues>
+    <VariableValue>
+      <nVarNumber>293.15</nVarNumber>
+      <nVarValue>5</nVarValue>
+      <nVarDigits>2</nVarDigits>
+    </VariableValue>
+    <VariableValue>
+      <nVarNumber>0.03333</nVarNumber>
+      <nVarValue>5</nVarValue>
+      <nVarDigits>3</nVarDigits>
+    </VariableValue>
+    <VariableValue>
+      <nVarNumber>0.06667</nVarNumber>
+      <nVarValue>5</nVarValue>
+      <nVarDigits/>
+    </VariableValue>
+    <PropertyValue>
+      <nPropNumber>1065.2</nPropNumber>
+      <nPropValue>5</nPropValue>
+      <nPropDigits>1</nPropDigits>
+      <CombinedUncertainty>
+        <nCombUncertAssessNum>293.15</nCombUncertAssessNum>
+        <nCombExpandUncertValue>5</nCombExpandUncertValue>
+      </CombinedUncertainty>
+    </PropertyValue>
+  </NumValues>
+  <NumValues>
+    <VariableValue>
+      <nVarNumber>2</nVarNumber>
+      <nVarValue>0.06667</nVarValue>
+      <nVarDigits>5</nVarDigits>
+    </VariableValue>
+    <VariableValue>
+      <nVarNumber>3</nVarNumber>
+      <nVarValue>0.13333</nVarValue>
+      <nVarDigits>5</nVarDigits>
+    </VariableValue>
+    <VariableValue>
+      <nVarNumber/>
+      <nVarValue>1104.7</nVarValue>
+      <nVarDigits>5</nVarDigits>
+    </VariableValue>
+    <PropertyValue>
+      <nPropNumber/>
+      <nPropValue/>
+      <nPropDigits/>
+      <CombinedUncertainty>
+        <nCombUncertAssessNum/>
+        <nCombExpandUncertValue/>
+      </CombinedUncertainty>
+    </PropertyValue>
+  </NumValues>
 </PureOrMixtureData>

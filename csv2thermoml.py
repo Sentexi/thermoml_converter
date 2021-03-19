@@ -190,13 +190,17 @@ def preproc_data_entry(data_csv):
     varIns = 0
     #Insertions to serialize 2D Variable info
     for l in range(len(data_csv_src[22])-1):
+    
+        
+        #TODO: Fix insertion error, inserting empty values
+    
         #Also adding nCompounds to account for the number of insertions done above
-        data_csv.insert(25+(l*3)+nIns+isFraction, ["entry",data_csv_src[22][l+1]])
-        data_csv.insert(25+(l*3)+nIns+1+isFraction, ["entry",data_csv_src[23][l+1]])
-        data_csv.insert(25+(l*3)+nIns+2+isFraction, ["entry",data_csv_src[24][l+1]])
+        data_csv.insert(25+(l*3)+nIns+isFraction, ["varnum_entry",data_csv_src[22][l+1]])
+        data_csv.insert(25+(l*3)+nIns+1+isFraction, ["vartype_entry",data_csv_src[23][l+1]])
+        data_csv.insert(25+(l*3)+nIns+2+isFraction, ["varphase_entry",data_csv_src[24][l+1]])
         if data_csv_src[25][l+1] != "":
             print("Fraction!")
-            data_csv.insert(25+(l*3)+nIns+3+isFraction, ["entry",data_csv_src[25][l+1]])
+            data_csv.insert(25+(l*3)+nIns+3+isFraction, ["ref_entry",data_csv_src[25][l+1]])
             isFraction = 1
             varIns += 4
         else:
@@ -206,7 +210,6 @@ def preproc_data_entry(data_csv):
         
         
             
-    data_csv = data_csv[:22+(nCompounds-1)*2]+data_csv[25+(nCompounds-1)*2:]
     
     #Update number of insertions already taken
     nIns += varIns
@@ -218,29 +221,40 @@ def preproc_data_entry(data_csv):
     #extract significant digits
     sig_digits = data_csv_src[26][1:]
     datapoints = data_csv_src[27:]
-        
+    
+    nDatapoints = len(datapoints)
+    nDatapoints_per_entry = len(datapoints[0])-2
+    
+    print(data_csv[:22+(nCompounds-1)*2])
+    print("-----------------------------")
+    print(data_csv[25+(nCompounds-1)*2:25+nIns])
+    
+    
+    data_csv = data_csv[:22+(nCompounds-1)*2]+data_csv[25+(nCompounds-1)*2:25+nIns]
+    
+    data_array = []    
         
     #TODO: Slice datapoints list accordingly and serialize through the loop!    
     for m in range(len(datapoints)):
-        for i in range(len(datapoints[m])):
+        for i in range(len(datapoints[m])-1):
             entry = datapoints[m]
             entry = entry[1:]
         
             print(len(entry))            
-            data_csv.insert(25+nIns,["data_entry", var_number[i]])
-            data_csv.insert(25+nIns+1,["data_entry", entry[i]])
-            data_csv.insert(25+nIns+2,["data_entry", sig_digits[i]])
+            data_array.append(["data_entry", var_number[i]])
+            data_array.append(["data_entry", entry[i]])
+            data_array.append(["data_entry", sig_digits[i]])
             
-            nIns += 3
+    data_csv += data_array
     
     
     print(data_csv)
 
-    return data_csv, nCompounds, nVariables, varTypes
+    return data_csv, nCompounds, nVariables, varTypes, nDatapoints, nDatapoints_per_entry
 
 def create_data_entry(data_csv):
 
-    data_csv, nCompounds, nVariables, varTypes = preproc_data_entry(data_csv)
+    data_csv, nCompounds, nVariables, varTypes, nDatapoints, nDatapoints_per_entry = preproc_data_entry(data_csv)
     
     print("Creating Data entry")
     
@@ -320,14 +334,15 @@ def create_data_entry(data_csv):
         eVarPhase = create_xml_subelement_with_list(VarPhaseID,"eVarPhase",Elements)    
 
     
-    def add_datapoint(values,digits):
+    for i in range(nDatapoints):
         NumValues = create_xml_subelement_with_list(PureOrMixtureData,"NumValues",empty)
 
         #loops for each variable
-        VariableValue = create_xml_subelement_with_list(NumValues,"VariableValue",empty)
-        nVarNumber = create_xml_subelement_with_list(VariableValue,"nVarNumber",Elements)
-        nVarValue = create_xml_subelement_with_list(VariableValue,"nVarValue",Elements)
-        nVarDigits = create_xml_subelement_with_list(VariableValue,"nVarDigits",Elements)
+        for j in range(nDatapoints_per_entry):
+            VariableValue = create_xml_subelement_with_list(NumValues,"VariableValue",empty)
+            nVarNumber = create_xml_subelement_with_list(VariableValue,"nVarNumber",Elements)
+            nVarValue = create_xml_subelement_with_list(VariableValue,"nVarValue",Elements)
+            nVarDigits = create_xml_subelement_with_list(VariableValue,"nVarDigits",Elements)
         
         #once per datapoint add property value
         PropertyValue = create_xml_subelement_with_list(NumValues,"PropertyValue",empty)
@@ -338,7 +353,6 @@ def create_data_entry(data_csv):
         nCombUncertAssessNum = create_xml_subelement_with_list(CombinedUncertainty,"nCombUncertAssessNum",Elements)
         nCombExpandUncertValue = create_xml_subelement_with_list(CombinedUncertainty,"nCombExpandUncertValue",Elements)
         
-        pass
     
     for i in range(len(data_csv)):
         print(len(Elements))
