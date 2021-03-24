@@ -1,0 +1,13 @@
+The number used to identify the compound in later measurements;3;
+International Chemical Identifier;InChI=1S/H2O/h1H2;
+International Chemical Identifier Key;XLYOFNOQVPJJNP-UHFFFAOYSA-N;
+Common Name, tag can be used infinitely to the right;water;
+Smiles Code;;
+Molecular Formula;H2O;
+ionic charge;;
+Sample number;1;
+"Source, e.g. ""commercial source""";Commercial source;
+Information on purity, arbitrary amount of steps possible, Purification step;1;2
+Mass percent of compund in sample;99,9;Deionized
+Significant digits;3;
+"Analysis Method, can be ""supplier""";Estimated by compiler;
