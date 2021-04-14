@@ -1,5 +1,6 @@
 import csv
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
+import xml.etree.ElementTree as ET
 from xml.etree import ElementTree
 from xml.dom import minidom
 import os
@@ -12,9 +13,15 @@ import dryrun as D #This script creates empty tagfiles, which is better than not
 #to ThermoML. Since ThermoML provides way more information and has a different data structure,
 #a lot of dummy values will be used for the time being.
 
+def create_xml_subelement_with_list(parent,name,list):
+    child = SubElement(parent, name)
+    list.append(child)
+    
+    return child
+
 def create_data_entry(data_csv):
 
-    data_csv, nCompounds, nVariables, varTypes, nDatapoints, nDatapoints_per_entry = preproc_data_entry(data_csv)
+    #data_csv, nCompounds, nVariables, varTypes, nDatapoints, nDatapoints_per_entry = preproc_data_entry(data_csv)
     
     print("Creating Data entry")
     
@@ -181,11 +188,26 @@ def create_thermoml(folderpath,cmlfile):
         all_datapoints += datapoint
     '''
     
-    all_datapoints = ''
+    all_datapoints = create_data_entry(datapoint_data)
     
     final_name = cmlfile.split(".")[0] + "_thermoml.xml"
     
     C.writefile(header + version_info + citation + all_compounds + all_datapoints + footer, final_name)
 
 if __name__ == "__main__":
-    create_thermoml("CML","CML_exp_sim.xml")
+    #create_thermoml("CML","CML_exp_sim.xml")
+    
+    tree = ET.parse('CML_exp_sim.xml')
+    root = tree.getroot()
+    for exp in root[0][0]:
+        #print(exp.tag, exp.attrib)
+        DOI = exp[0][0][0].text #this is just for consistency, no need to read in the DOI each time
+        ID = exp[0][1][0].text #the datapoint number, starts with 1
+        val_density = exp[0][2][0] #the solvent density
+        val_error = exp[0][3][0] #the corresponsing error
+        
+        mol_DES = exp[1][0][0].text #the molar ratio of the DES
+        mol_water = exp[1][1][0].text #the molar ratio of water
+        T = exp[1][2][0].text #temperature in K
+        
+        
