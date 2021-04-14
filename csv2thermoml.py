@@ -403,7 +403,7 @@ def create_thermoml(folderpath):
     version_info = create_version_info()
     
     #Reads Citation info
-    citation_data  = csv_reader(os.path.join('CSV','Citation_template.csv'))
+    citation_data  = csv_reader(os.path.join(folderpath,'Citation_template.csv'))
     citation , filename = create_citation(citation_data)
     
     
