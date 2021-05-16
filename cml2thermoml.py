@@ -121,7 +121,7 @@ def create_data_entry(cmldata):
             nVarNumber = create_xml_subelement_with_list(VariableValue,"nVarNumber",Elements)
             nVarNumber.text = str(j+1)
             nVarValue = create_xml_subelement_with_list(VariableValue,"nVarValue",Elements)
-            nVarValue.text = str(cmldata[i][-j])
+            nVarValue.text = str(cmldata[i][-j-1])
             nVarDigits = create_xml_subelement_with_list(VariableValue,"nVarDigits",Elements)
             nVarDigits.text = str(0) #CML provides no significant digits
         
@@ -224,14 +224,16 @@ if __name__ == "__main__":
         #print(exp.tag, exp.attrib)
         DOI = exp[0][0][0].text #this is just for consistency, no need to read in the DOI each time
         ID = exp[0][1][0].text #the datapoint number, starts with 1
-        val_density = exp[0][2][0] #the solvent density
-        val_error = exp[0][3][0] #the corresponsing error
+        val_density = exp[0][2][0].text #the solvent density
+        val_error = exp[0][3][0].text #the corresponsing error
         
         mol_DES = exp[1][0][0].text #the molar ratio of the DES
         mol_water = exp[1][1][0].text #the molar ratio of water
         T = exp[1][2][0].text #temperature in K
         
         cmldata.append([DOI,ID,val_density,str(val_error),mol_DES,mol_water,T]) #eventually this could be a class
+        
+    print(cmldata[0])
         
     create_thermoml("CML","CML_exp_sim.xml",cmldata)
         
