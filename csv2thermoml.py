@@ -207,10 +207,10 @@ def preproc_data_entry(data_csv):
         if data_csv_src[22][l+1] != "":
             data_csv.insert(25+(l*3)+nIns+isFraction, ["varnum_entry",data_csv_src[22][l+1]])
             data_csv.insert(25+(l*3)+nIns+1+isFraction, ["vartype_entry",data_csv_src[23][l+1]])
-            data_csv.insert(25+(l*3)+nIns+2+isFraction, ["varphase_entry",data_csv_src[24][l+1]])
+            data_csv.insert(25+(l*3)+nIns+3+isFraction, ["varphase_entry",data_csv_src[24][l+1]])
             if data_csv_src[25][l+1] != "":
                 #print("Fraction!")
-                data_csv.insert(25+(l*3)+nIns+3+isFraction, ["ref_entry",data_csv_src[25][l+1]])
+                data_csv.insert(25+(l*3)+nIns+2+isFraction, ["ref_entry",data_csv_src[25][l+1]])
                 isFraction = 1
                 varIns += 4
             else:
